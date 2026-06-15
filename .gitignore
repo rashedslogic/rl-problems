@@ -1,0 +1,41 @@
+# ==========================================
+# 1. OS & Editor Configuration
+# ==========================================
+.DS_Store
+Thumbs.db
+.vscode/
+*.code-workspace
+.history/
+
+# ==========================================
+# 2. Pure Java (Compiled Bytecode & Tooling)
+# ==========================================
+*.class
+*.jar
+*.war
+.metadata/
+bin/
+out/
+.classpath
+.project
+.settings/
+.factorypath
+
+# ==========================================
+# 3. Pure Python (Interpreter Caches & Venvs)
+# ==========================================
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.venv/
+venv/
+ENV/
+
+# ==========================================
+# 4. Local Problem-Solving I/O Helpers
+# ==========================================
+# input.txt
+# output.txt
+# test*.txt
+# sample*.txt
