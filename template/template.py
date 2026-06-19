@@ -22,7 +22,7 @@ class template:
 
         # Print hello output
         self.dprint("-------------------------------------")
-        self.dprint("Hello Output!")
+        print("Hello Output!")
         self.dprint("-------------------------------------")
 
 if __name__ == "__main__":
