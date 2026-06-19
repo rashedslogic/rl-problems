@@ -26,4 +26,4 @@ class template:
         self.dprint("-------------------------------------")
 
 if __name__ == "__main__":
-    template(True).generateOutput()
+    template(False).generateOutput()
