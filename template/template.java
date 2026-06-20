@@ -52,8 +52,7 @@ public class template {
             System.out.println("Hello Output!");
             dprint("-------------------------------------");
         } catch (Exception exception) {
-            if (debug)
-                exception.printStackTrace();
+            dprint(exception.getMessage());
         }
     }
 

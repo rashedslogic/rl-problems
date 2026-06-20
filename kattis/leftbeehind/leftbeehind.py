@@ -20,12 +20,12 @@ class leftbeehind:
 
             inputNumberOfJars = sys.stdin.readline()
             if not inputNumberOfJars:
-                print("Invalid input.")
+                self.dprint("Invalid input.")
                 break
 
             numberOfJars = inputNumberOfJars.strip().split()
             if len(numberOfJars) != 2:
-                print("Input count is not 2.")
+                self.dprint("Input count is not 2.")
                 break
 
             sweetJars = int(numberOfJars[0].strip())
