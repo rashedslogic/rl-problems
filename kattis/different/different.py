@@ -10,6 +10,11 @@ class different:
         if self.debug:
             print(*args, **kwargs)
 
+    def isValidNumber(self, inputNumber: int) -> bool:
+        min = 0
+        max = 1000000000000000  # 10^15
+        return min <= inputNumber <= max
+
     def generateOutput(self):
         # Take input from user
         self.dprint("-------------------------------------")
@@ -34,6 +39,12 @@ class different:
             self.dprint(
                 f"First Number: {firstNumber} and Second Number: {secondNumber}"
             )
+
+            # Check the validity of the numbers
+            if not self.isValidNumber(firstNumber) or not self.isValidNumber(secondNumber):
+            # if any(not self.isValidNumber(n) for n in [firstNumber, secondNumber]):
+                self.dprint("Numbers are not valid.")
+                break
 
             # Calculate the absolute value
             self.dprint("This is absolute value:")

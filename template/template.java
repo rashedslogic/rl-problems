@@ -36,6 +36,15 @@ public class template {
         return stringTokenizer.nextToken();
     }
 
+    private int countTokens() {
+        return (stringTokenizer == null) ? 0 : stringTokenizer.countTokens();
+    }
+
+    private String readLine() throws IOException {
+        stringTokenizer = null; // Invalidate the current line cache
+        return bufferedReader.readLine();
+    }
+
     public void generateOutput() {
         try {
             // // Take input from user
