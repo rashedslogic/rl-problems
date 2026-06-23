@@ -4,6 +4,17 @@ class cd:
 
     def __init__(self, debug: bool = False):
         self.debug = debug
+        self.tokens = iter(sys.stdin.read().split())
+
+    def nextTokenString(self) -> str:
+        try:
+            return next(self.tokens)
+        except StopIteration:
+            return None
+
+    def nextTokenInt(self) -> int:
+        token: str = self.nextTokenString()
+        return int(token) if token is not None else None
 
     def dprint(self, *args, **kwargs):
         if self.debug:
@@ -18,37 +29,20 @@ class cd:
         minimum = 1
         maximum = 1000000000  # 1 Billion 10^9
         return minimum <= catalogNumber <= maximum
-    
-    def isTerminated(self, inputText: str) -> bool:
-        return inputText.strip() == "0 0"
 
     def generateOutput(self):
         # Take input from user
         self.dprint("-------------------------------------")
+        self.dprint("Input the test cases.")
         while True:
-            self.dprint("Input the test case metadata.")
-            inputMetadata = sys.stdin.readline()
+            numberOfCdByJack = self.nextTokenInt()
+            numberOfCdByJill = self.nextTokenInt()
 
-            if not inputMetadata:
-                self.dprint("Invalid input.")
-                break
-            
-            # Terminate the input if the input is 0 0
-            if self.isTerminated(inputMetadata):
-                self.dprint("Termination command is found, exiting.")
+            # Terminate the input if the input is 0 0 or EOF
+            if numberOfCdByJack is None or numberOfCdByJill is None or (numberOfCdByJack == 0 and numberOfCdByJill == 0):
+                self.dprint("Termination condition or EOF reached.")
                 break
 
-            # Process two metadata
-            self.dprint(f"Raw input: {inputMetadata}")
-            metadata = inputMetadata.strip().split()
-            numberOfMetadata = len(metadata)
-            self.dprint(f"Number of metadata: {numberOfMetadata}")
-            if numberOfMetadata != 2:
-                self.dprint("Invalid number of metadata.")
-                break
-
-            numberOfCdByJack = int(metadata[0].strip())
-            numberOfCdByJill = int(metadata[1].strip())
             self.dprint(
                 f"Number of CDs owned by Jack: {numberOfCdByJack} and Number of CDs owned by Jill: {numberOfCdByJill}"
             )
@@ -59,56 +53,68 @@ class cd:
                 break
             
             # Process the input for Jack's CD
-            catalogNumberJack = set()
+            catalogNumbersJack = [0] * numberOfCdByJack
             self.dprint("Input Jack's catalog number.")
             for i in range(numberOfCdByJack):
                 self.dprint(f"Input Jack's number {i+1} catalog number of CD")
-                inputCatalogNumberOfJack = sys.stdin.readline()
+                valCatalogNumberOfJack = self.nextTokenInt()
 
                 # Check invalid catalog input.
-                if not inputCatalogNumberOfJack:
-                    self.dprint("Invalid catalog input.")
+                if valCatalogNumberOfJack is None:
+                    self.dprint("Invalid input(EOF reached early).")
                     break
                 
                 # Find the valid catalog number.
-                valCatalogNumberJack = int(inputCatalogNumberOfJack.strip())
-                if not self.isValidCatalogNumber(valCatalogNumberJack):
+                if not self.isValidCatalogNumber(valCatalogNumberOfJack):
                     self.dprint("Invalid catalog number.")
                     break
                 
                 # Store catalog number
-                self.dprint(f"Jack's catalog number {i+1} is: {valCatalogNumberJack}")
-                catalogNumberJack.add(valCatalogNumberJack)
-            self.dprint(f"Total catalog numbers of Jack: {catalogNumberJack}")
-                
+                self.dprint(f"Jack's catalog number {i+1} is: {valCatalogNumberOfJack}")
+                catalogNumbersJack[i] = valCatalogNumberOfJack
+            self.dprint(f"Total catalog numbers of Jack: {catalogNumbersJack}")
+
             # Process the input for Jill's CD
-            catalogNumberJill = set()
+            catalogNumbersJill = [0] * numberOfCdByJill
             self.dprint("Input Jill's catalog number.")
             for i in range(numberOfCdByJill):
                 self.dprint(f"Input Jill's number {i+1} catalog number of CD")
-                inputCatalogNumberOfJill = sys.stdin.readline()
+                valCatalogNumberOfJill = self.nextTokenInt()
 
                 # Check invalid catalog input.
-                if not inputCatalogNumberOfJill:
-                    self.dprint("Invalid catalog input.")
+                if valCatalogNumberOfJill is None:
+                    self.dprint("Invalid input(EOF reached early).")
                     break
                 
                 # Find the valid catalog number.
-                valCatalogNumberJill = int(inputCatalogNumberOfJill.strip())
-                if not self.isValidCatalogNumber(valCatalogNumberJill):
+                if not self.isValidCatalogNumber(valCatalogNumberOfJill):
                     self.dprint("Invalid catalog number.")
                     break
                 
                 # Store catalog number
-                self.dprint(f"Jill's catalog number {i+1} is: {valCatalogNumberJill}")
-                catalogNumberJill.add(valCatalogNumberJill)
-            self.dprint(f"Total catalog numbers of Jill: {catalogNumberJill}")
+                self.dprint(f"Jill's catalog number {i+1} is: {valCatalogNumberOfJill}")
+                catalogNumbersJill[i] = valCatalogNumberOfJill
+            self.dprint(f"Total catalog numbers of Jill: {catalogNumbersJill}")
             
-            # Find the number of common CDs
-            commonCatalogNumbers = set(catalogNumberJack) & set(catalogNumberJill)
-            self.dprint(f"Common catalog numbers: {commonCatalogNumbers}")
+            # Find the number of common CDs using two pointer approache for reducing time limit exceed
+            jackPtr = 0
+            jillPtr= 0
+            commonCount = 0 
+            jackCatalogCount = len(catalogNumbersJack)
+            jillCatalogCount = len(catalogNumbersJill)
+
+            while jackPtr < jackCatalogCount and jillPtr < jillCatalogCount:
+                if catalogNumbersJack[jackPtr] == catalogNumbersJill[jillPtr]:
+                    commonCount += 1
+                    jackPtr += 1
+                    jillPtr += 1
+                elif catalogNumbersJack[jackPtr] < catalogNumbersJill[jillPtr]:
+                    jackPtr += 1
+                else:
+                    jillPtr += 1
+
             self.dprint("Common catalog numbers count is:")
-            print(len(commonCatalogNumbers))
+            print(commonCount)
 
         self.dprint("-------------------------------------")
 
