@@ -12,12 +12,12 @@ class cd:
             print(*args, **kwargs)
 
     def generateOutput(self):
-        # 1. This line blocks and waits for input stream closure (Human Time)
+        # This line blocks and waits for input stream closure (Human Time)
         tokens = sys.stdin.read().split()
         if not tokens:
             return
 
-        # 2. Start the timer (Pure Algorithm Execution Time)
+        # Start the timer (Pure Algorithm Execution Time)
         start_runtime = time.perf_counter()
 
         iterator = iter(tokens)
@@ -35,17 +35,37 @@ class cd:
             if N == 0 and M == 0:
                 break
 
-            jack_cds = {int(next(iterator)) for _ in range(N)}
-            jill_cds = {int(next(iterator)) for _ in range(M)}
+            # jack_cds = {int(next(iterator)) for _ in range(N)}
+            # jill_cds = {int(next(iterator)) for _ in range(M)}
+            # print(len(jack_cds & jill_cds))
 
-            print(len(jack_cds & jill_cds))
+            # Store Jack's CD into a raw primitive array
+            jack_cds = [int(next(iterator)) for _ in range(N)]
+            self.dprint(f"Jacks CD: {jack_cds}");
 
-        # 3. Stop the timer
+            # Perform Two-pointer intersection sweep comparing Jill's CDs
+            intersection_count = 0
+            jack_idx = 0
+            
+            for _ in range(M):
+                jill_cd = int(next(iterator))
+
+                while jack_idx < N and jack_cds[jack_idx] < jill_cd:
+                    jack_idx += 1
+
+                if jack_idx < N and jack_cds[jack_idx] == jill_cd:
+                    intersection_count += 1
+                    jack_idx += 1
+
+            # Print the final output of common items
+            print(intersection_count)
+
+        # Stop the timer
         end_runtime = time.perf_counter()
         total_runtime = end_runtime - start_runtime
 
         self.dprint(
-            f"[Algorithmic Runtime] {total_runtime:.6f} seconds", file=sys.stderr
+            f"[Algorithmic Runtime] {total_runtime:.6f} seconds"
         )
 
 
