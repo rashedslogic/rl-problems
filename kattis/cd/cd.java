@@ -79,8 +79,8 @@ public class cd {
 
         // Calculate the difference and convert to second
         // Since 1 second = 1,000,000,000 nanoseconds, divide by 1e9
-        double totalExecutionTime = (endTime - startTime) / 1_000_000_000.0;
-        dprint("[Algorithmic Runtime] %.6f seconds" + totalExecutionTime);
+        double totalRuntime = (endTime - startTime) / 1_000_000_000.0;
+        dprint("[Algorithmic Runtime] %.6f seconds" + totalRuntime);
     }
 
     private static void dprint(Object... args) {
