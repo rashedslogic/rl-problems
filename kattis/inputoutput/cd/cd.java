@@ -1,4 +1,4 @@
-package kattis.cd;
+package kattis.inputoutput.cd;
 
 import java.io.IOException;
 import java.util.Arrays;

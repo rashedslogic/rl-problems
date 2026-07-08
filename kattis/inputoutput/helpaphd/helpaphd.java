@@ -1,4 +1,4 @@
-package kattis.helpaphd;
+package kattis.inputoutput.helpaphd;
 
 import java.io.BufferedReader;
 import java.io.IOException;

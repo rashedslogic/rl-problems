@@ -1,4 +1,4 @@
-package kattis.carrots;
+package kattis.inputoutput.carrots;
 
 import java.io.BufferedReader;
 import java.io.IOException;

@@ -1,4 +1,4 @@
-package kattis.different;
+package kattis.inputoutput.different;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;

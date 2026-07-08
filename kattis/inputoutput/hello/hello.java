@@ -1,4 +1,4 @@
-package kattis.hello;
+package kattis.inputoutput.hello;
 
 public class hello {
 

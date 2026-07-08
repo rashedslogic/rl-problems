@@ -1,4 +1,4 @@
-package kattis.simpleaddition;
+package kattis.inputoutput.simpleaddition;
 
 import java.io.BufferedReader;
 import java.io.IOException;

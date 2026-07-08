@@ -1,4 +1,4 @@
-package kattis.statistics;
+package kattis.inputoutput.statistics;
 
 import java.io.BufferedReader;
 import java.io.IOException;

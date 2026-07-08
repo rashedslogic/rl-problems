@@ -1,4 +1,4 @@
-package kattis.faktor;
+package kattis.foundation.faktor;
 
 import java.io.BufferedReader;
 import java.io.IOException;
