@@ -4,32 +4,6 @@ from typing import Optional
 
 sys.setrecursionlimit(300000)
 
-
-class FastScanner:
-    tokens = None
-
-    @classmethod
-    def init(cls) -> None:
-        cls.tokens = iter(sys.stdin.read().split())
-
-    @classmethod
-    def next_string(cls) -> Optional[str]:
-        try:
-            return next(cls.tokens)
-        except StopIteration:
-            return None
-
-    @classmethod
-    def next_int(cls) -> Optional[int]:
-        token = cls.next_string()
-        return int(token) if token is not None else None
-
-    @classmethod
-    def next_double(cls) -> Optional[float]:
-        token = cls.next_string()
-        return float(token) if token is not None else None
-
-
 class template:
     DEBUG = False
     _start_runtime = 0.0
@@ -94,8 +68,31 @@ class template:
         #     d_print("Input:", n)
         #     write(f"{n}\n")
 
-
 if __name__ == "__main__":
     template.init()
     template.solve()
     template.close()
+
+class FastScanner:
+    tokens = None
+
+    @classmethod
+    def init(cls) -> None:
+        cls.tokens = iter(sys.stdin.read().split())
+
+    @classmethod
+    def next_string(cls) -> Optional[str]:
+        try:
+            return next(cls.tokens)
+        except StopIteration:
+            return None
+
+    @classmethod
+    def next_int(cls) -> Optional[int]:
+        token = cls.next_string()
+        return int(token) if token is not None else None
+
+    @classmethod
+    def next_double(cls) -> Optional[float]:
+        token = cls.next_string()
+        return float(token) if token is not None else None
