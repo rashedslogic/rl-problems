@@ -28,7 +28,7 @@ class FastScanner:
         token = cls.next_string()
         return float(token) if token is not None else None
 
-class quadrant:
+class moscowdream:
     DEBUG = False
     _start_runtime = 0.0
 
@@ -40,22 +40,30 @@ class quadrant:
 
     @classmethod
     def close(cls) -> None:
-        """Evaluates hardware runtime execution speed."""
         if cls.DEBUG:
             total_runtime = time.perf_counter() - cls._start_runtime
             print(f"[Algorithmic Runtime] {total_runtime:.6f} seconds", file=sys.stderr)
 
     @classmethod
     def d_print(cls, *args, sep=" ") -> None:
-        """Enterprise trace logger. Always routes to stderr safely."""
         if cls.DEBUG:
             print(f"[DEBUG] {sep.join(map(str, args))}", file=sys.stderr)
     
     @classmethod  
-    def isValidCoordinate(cls, value: int) -> bool:
-        min = -1000
-        max = 1000
-        return min <= value <= max and value != 0
+    def isValidProblem(cls, value: int) -> bool:
+        min = 0
+        max = 10
+        return min <= value <= max
+
+    @classmethod    
+    def isValidNumberOfProblem(cls, value: int) -> bool:
+        min = 0
+        max = 20
+        return min <= value <= max
+    
+    @classmethod
+    def hasAtLeastOneProblem(cls, val: int) -> bool:
+        return val >= 1
 
     @classmethod
     def solve(cls) -> None:
@@ -65,34 +73,37 @@ class quadrant:
         write = sys.stdout.write
         d_print = cls.d_print
 
-        # Take the coordinate input
-        inputX = next_int()
-        inputY = next_int()
+        # Take the input of problemset info
+        inputA = next_int()
+        inputB = next_int()
+        inputC = next_int()
+        inputN = next_int()
         extraInput = next_string()
-        if inputX is None or inputY is None or extraInput is not None:
+
+        # Wrong input
+        if None in (inputA, inputB, inputC, inputN) or extraInput is not None:
             d_print("Wrong input")
             return
 
-        # Is valid input
-        d_print("Parsed Coordinates -> X:", inputX, "Y:", inputY)
-        if any(not cls.isValidCoordinate(coordinate) for coordinate in [inputX, inputY]):
+        # Invalid input
+        if any(not cls.isValidProblem(n) for n in [inputA, inputB, inputC]) or not cls.isValidNumberOfProblem(inputN):
             d_print("Invalid input")
             return
 
-        # Find quadrant
-        if inputX > 0 and inputY > 0:
-            write("1\n")
-        elif inputX < 0 and inputY > 0:
-            write("2\n")
-        elif inputX < 0 and inputY < 0:
-            write("3\n")
-        elif inputX > 0 and inputY < 0:
-            write("4\n")
-        else:
-            d_print("Unknown coordinate")
+        # Find problemset info
+        d_print("Parsed info -> a: ", inputA, " b: ", inputB, " c: ", inputC, " n: ", inputN)
+        if any(not cls.hasAtLeastOneProblem(n) for n in [inputA, inputB, inputC]):
+            d_print("Each item does not has at least 1 problem")
+            write("NO\n")
+            return
 
+        if inputN >= 3 and (inputA + inputB + inputC) >= inputN:
+            d_print("Valid problemset")
+            write("YES\n")
+        else:
+            write("NO\n")
 
 if __name__ == "__main__":
-    quadrant.init()
-    quadrant.solve()
-    quadrant.close()
+    moscowdream.init()
+    moscowdream.solve()
+    moscowdream.close()

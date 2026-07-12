@@ -40,14 +40,12 @@ class template:
 
     @classmethod
     def close(cls) -> None:
-        """Evaluates hardware runtime execution speed."""
         if cls.DEBUG:
             total_runtime = time.perf_counter() - cls._start_runtime
             print(f"[Algorithmic Runtime] {total_runtime:.6f} seconds", file=sys.stderr)
 
     @classmethod
     def d_print(cls, *args, sep=" ") -> None:
-        """Enterprise trace logger. Always routes to stderr safely."""
         if cls.DEBUG:
             print(f"[DEBUG] {sep.join(map(str, args))}", file=sys.stderr)
 
